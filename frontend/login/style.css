@@ -1,0 +1,203 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2980b9, #6dd5fa, #3a47d5);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 20px;
+  position: relative;
+}
+
+.card {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 10px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  text-align: center;
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.card.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card h2 {
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: 600;
+}
+
+.input-field {
+  position: relative;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.input-field input {
+  width: 100%;
+  padding: 14px 20px 14px 45px;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input-field input:focus {
+  border-color: #3a47d5;
+  box-shadow: 0 0 8px rgba(58, 71, 213, 0.2);
+}
+
+.input-field i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  transition: color 0.3s ease;
+}
+
+.input-field input:focus + i {
+  color: #3a47d5;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(90deg, #3a47d5, #00d2ff);
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(58, 71, 213, 0.3);
+}
+
+.btn:hover {
+  background: linear-gradient(90deg, #00d2ff, #3a47d5);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(58, 71, 213, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.error {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 5px;
+  text-align: left;
+  padding-left: 20px;
+  display: none;
+}
+
+.toggle-link {
+  display: block;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #3a47d5;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.toggle-link:hover {
+  color: #00d2ff;
+  text-decoration: underline;
+}
+
+.social-text {
+  margin: 25px 0 15px;
+  color: #666;
+  font-size: 14px;
+  position: relative;
+}
+
+.social-text::before,
+.social-text::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 30%;
+  background: #ddd;
+  top: 50%;
+}
+
+.social-text::before {
+  left: 0;
+}
+
+.social-text::after {
+  right: 0;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.social-icons i {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0 8px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  color: #3a47d5;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.social-icons i:hover {
+  background: #3a47d5;
+  color: white;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 30px 20px;
+  }
+  
+  .input-field input {
+    padding: 12px 20px 12px 40px;
+  }
+  
+  .btn {
+    padding: 12px;
+  }
+}

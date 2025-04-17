@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block Blog - Share Your Thoughts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="welcome-popup" class="popup">
+        <div class="popup-content">
+            <span id="welcome-message"></span>
+            <button id="close-popup" onclick="closePopup()">&times;</button>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <img src="../images/BLOCK BLOG.png" alt="Block Blog Logo" class="logo">
+                <span>Block Blog</span>
+            </div>
+            <div class="nav-links">
+                <a href="../home/home.html">Home</a>
+                <a href="../about/about.html">About</a>
+                <a href="../services/services.html">Services</a>
+                <a href="mailto:contact@blockblog.com">Contact</a>
+            </div>
+<div class="user-section">
+    <a href="../login/index.html" class="login-btn" id="login-btn">Login</a>
+    <div class="username-container" id="username-container">
+        <div class="user-icon" id="user-icon">
+            <span>👤</span>
+        </div>
+        <div class="user-dropdown" id="logout-dropdown">
+            <a href="#" onclick="logout()">Logout</a>
+        </div>
+    </div>
+    <button class="mobile-menu-btn">&#9776;</button>
+</div>
+            <div class="notification-icon">
+                <button id="bell-icon" onclick="toggleNotifications()">&#128276;</button>
+                <div id="notification-dropdown" class="notification-dropdown">
+                    <p>No new notifications</p>
+                </div>
+            </div>
+            <button class="mobile-menu-btn">&#9776;</button>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Welcome to Block Blog</h1>
+                <p style="color: white;">The platform where your thoughts matter! Join our vibrant community-driven space designed for sharing and discovering diverse opinions.</p>
+                <div class="cta">
+                    <button id="get-started-btn" onclick="checkLogin()">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&q=80" alt="Person writing blog">
+            </div>
+        </div>
+    </section>
+    <section class="categories">
+        <h2>Explore Categories</h2>
+        <div class="category-grid">
+            <div class="category-card" style="--category-color: #FF6B6B;">
+                <i class="fas fa-code"></i>
+                <h3>Technology</h3>
+                <p>Explore the latest in tech</p>
+            </div>
+            <div class="category-card" style="--category-color: #4ECDC4;">
+                <i class="fas fa-book"></i>
+                <h3>Literature</h3>
+                <p>Share your stories</p>
+            </div>
+            <div class="category-card" style="--category-color: #45B7D1;">
+                <i class="fas fa-camera"></i>
+                <h3>Photography</h3>
+                <p>Capture moments</p>
+            </div>
+            <div class="category-card" style="--category-color: #96CEB4;">
+                <i class="fas fa-utensils"></i>
+                <h3>Food</h3>
+                <p>Culinary adventures</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Block Blog</h3>
+                <p>A platform for sharing thoughts, ideas, and meaningful discussions.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="./home.html">Home</a></li>
+                    <li><a href="../about/about.html">About</a></li>
+                    <li><a href="../services/services.html">Services</a></li>
+                    <li><a href="mailto:contact@blockblog.com">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">Twitter</a>
+                    <a href="#" class="social-link">LinkedIn</a>
+                    <a href="#" class="social-link">Facebook</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 Block Blog. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.onload = function () {
+    const username = localStorage.getItem('username');
+    const loginBtn = document.getElementById('login-btn');
+    const usernameContainer = document.getElementById('username-container');
+    const userIcon = document.getElementById('user-icon');
+    const logoutDropdown = document.getElementById('logout-dropdown');
+    const welcomePopup = document.getElementById('welcome-popup');
+    const welcomeMessage = document.getElementById('welcome-message');
+
+    if (username) {
+        loginBtn.style.display = 'none'; 
+        usernameContainer.style.display = 'flex'; 
+
+        const welcomeNotification = JSON.parse(localStorage.getItem('welcomeNotification'));
+        if (welcomeNotification) {
+            welcomeMessage.textContent = welcomeNotification.message;
+            welcomePopup.style.display = 'flex';
+            localStorage.removeItem('welcomeNotification');
+        }
+
+        userIcon.addEventListener('mouseenter', () => {
+            logoutDropdown.style.display = 'block';
+        });
+
+        usernameContainer.addEventListener('mouseleave', () => {
+            logoutDropdown.style.display = 'none';
+        });
+    }
+};
+
+function closePopup() {
+    document.getElementById('welcome-popup').style.display = 'none';
+}
+
+function toggleNotifications() {
+    document.getElementById('notification-dropdown').classList.toggle('active');
+}
+
+function logout() {
+    localStorage.removeItem('username');
+    window.location.reload();
+}
+
+function checkLogin() {
+    const username = localStorage.getItem('username');
+    if (!username) {
+        alert('Please log in to continue.');
+        window.location.href = '../login/index.html';
+    } else {
+        window.location.href = '../getstarted/getstarted.html';
+    }
+}
+
+    </script>
+</body>
+</html>
