@@ -1,6 +1,23 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const express = require('express');
+const path = require('path');
+
+const app = express();
+
+// Serve static files from the frontend directory
+app.use(express.static(path.join(__dirname, '../frontend')));
+
+// Fallback route to serve home.html for any unmatched routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/home/home.html'));
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 const app = express();
 app.use(cors());
